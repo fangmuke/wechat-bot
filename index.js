@@ -96,6 +96,8 @@ bot.on('message', async (msg) => {
       let message = `本群天梯排行榜
 (${start} - ${end}) - ${count}`
       let i = 1
+
+      await room.sync()
       for (const msg of messages) {
         let contact = bot.Contact.load(msg.getDataValue('contactId'))
         let alias = await room.alias(contact)
