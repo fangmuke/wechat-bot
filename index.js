@@ -71,6 +71,7 @@ bot.on('message', async (msg) => {
       const end = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss')
       const count = await Message.count({
         where: {
+          roomId,
           createdAt: {
             [Op.between]: [start, end],
           },
@@ -82,6 +83,7 @@ bot.on('message', async (msg) => {
           [sequelize.fn('COUNT', sequelize.col('id')), 'count'],
         ],
         where: {
+          roomId,
           createdAt: {
             [Op.between]: [start, end],
           },
@@ -90,18 +92,17 @@ bot.on('message', async (msg) => {
         order: [[sequelize.fn('COUNT', sequelize.col('id')), 'DESC']],
         limit: 10,
       })
+
       let message = `本群天梯排行榜
 (${start} - ${end}) - ${count}`
+      let i = 1
+      for (const msg of messages) {
+        let contact = bot.Contact.load(msg.getDataValue('contactId'))
+        let alias = await room.alias(contact)
 
-      await Promise.all(
-        messages.map(async (msg, index) => {
-          const contact = bot.Contact.load(msg.getDataValue('contactId'))
-          const alias = await room.alias(contact)
-
-          message += `
-top${index + 1} ${alias} - ${msg.getDataValue('count')}`
-        })
-      )
+        message += `
+top${i++} ${alias} - ${msg.getDataValue('count')}`
+      }
       await room.say(message)
     }
   } else {
