@@ -2,7 +2,7 @@
   "name": "bot",
   "version": "1.0.0",
   "description": "bot",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +11,8 @@
   "dependencies": {
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
+    "qrcode-terminal": "^0.12.0",
+    "rx-queue": "^0.8.5",
     "sequelize": "^6.3.3",
     "sqlite3": "^5.0.0",
     "wechaty": "^0.40.10",
