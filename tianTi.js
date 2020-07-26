@@ -1,5 +1,5 @@
 const { DelayQueue } = require('rx-queue')
-const { Message } = require('./models/message')
+const Message = require('./models/message')
 const { Sequelize, Op } = require('sequelize')
 const moment = require('moment')
 

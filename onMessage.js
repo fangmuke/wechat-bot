@@ -1,5 +1,5 @@
 const { Message: MessageType } = require('wechaty')
-const { Message } = require('./models/message')
+const Message = require('./models/message')
 const TianTi = require('./tianTi')
 const _ = require('lodash')
 
@@ -52,7 +52,6 @@ module.exports = (bot) => {
             TianTi.next({ room, bot })
             return
           }
-
           return
         }
       }
