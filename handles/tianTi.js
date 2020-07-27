@@ -1,5 +1,5 @@
 const { DelayQueue } = require('rx-queue')
-const Message = require('./models/message')
+const Message = require('../models/message')
 const { Sequelize, Op } = require('sequelize')
 const moment = require('moment')
 
@@ -8,10 +8,10 @@ const sequelize = new Sequelize({
   storage: 'bot.db',
 })
 
-const queue = new DelayQueue(2000) // set delay period time to 500 milliseconds
-queue.subscribe(async ({ room, bot }) => {
+module.exports = new DelayQueue(2000).subscribe(async ({ msg, bot }) => {
   const start = moment().startOf('day').format('YYYY-MM-DD HH:mm:ss')
   const end = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss')
+  const room = msg.room()
   const roomId = room.id
   const count = await Message.count({
     where: {
@@ -42,7 +42,6 @@ queue.subscribe(async ({ room, bot }) => {
 `
 
   let i = 1
-  await room.sync()
   for (const msg of messages) {
     let contact = bot.Contact.load(msg.getDataValue('contactId'))
     let alias = await room.alias(contact)
@@ -52,5 +51,3 @@ top${i++} ${alias} - ${msg.getDataValue('count')}`
   }
   await room.say(message)
 })
-
-module.exports = queue

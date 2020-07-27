@@ -1,20 +1,19 @@
 const { Wechaty } = require('wechaty')
-const onMessage = require('./onMessage')
+const qrcode = require('qrcode-terminal')
+const onMessage = require('./handles/onMessage')
 
 const puppet = 'wechaty-puppet-padplus' // 使用ipad 的方式接入。
 
 const bot = Wechaty.instance({
   name: 'bot',
   puppet,
-}) // Global Instance
+})
 
 bot.start()
 
 bot.on('scan', (url, code) => {
-  if (!/201|200/.test(String(code))) {
-    let loginUrl = url.replace(/\/qrcode\//, '/l/')
-    require('qrcode-terminal').generate(loginUrl, 'small')
-  }
+  qrcode.generate(url, { small: true })
+
   console.log(`${url}\n[${code}] Scan QR Code in above url to login: `)
 })
 
