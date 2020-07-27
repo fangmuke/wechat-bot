@@ -1,7 +1,6 @@
 const { Message: MessageType } = require('wechaty')
 const Message = require('../models/message')
 const tianTi = require('./tianTi')
-const t = require('./t')
 const _ = require('lodash')
 const myTianTi = require('./myTianTi')
 const tip = require('./tip')
