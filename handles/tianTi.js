@@ -47,6 +47,9 @@ module.exports = new DelayQueue(2000).subscribe(async ({ msg, bot }) => {
     let alias = null
     if (room.has(contact)) {
       alias = await room.alias(contact)
+      if (alias == null) {
+        alias = contact.name()
+      }
     }
 
     message += `

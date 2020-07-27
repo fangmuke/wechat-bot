@@ -4,7 +4,10 @@ module.exports = new DelayQueue(2000).subscribe(async ({ msg, bot }) => {
   const contact = await msg.from()
   const room = await msg.room()
   const exampleContact = await bot.Contact.load('wxid_vdha0qorca4e22')
-  const exampleAlias = await room.alias(exampleContact)
+  let exampleAlias = await room.alias(exampleContact)
+  if (exampleAlias == null) {
+    exampleAlias = exampleContact.name()
+  }
 
   room.say(
     `
