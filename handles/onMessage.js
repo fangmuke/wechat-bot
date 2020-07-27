@@ -8,6 +8,7 @@ const tip = require('./tip')
 module.exports = (bot) => {
   return async function onMessage(msg) {
     if (msg.self()) return
+    if (msg.type() == 0) return
 
     console.log('=============================')
     console.log(`msg : ${msg}`)
