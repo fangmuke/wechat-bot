@@ -11,7 +11,7 @@ const sequelize = new Sequelize({
 module.exports = new DelayQueue(2000).subscribe(async ({ msg, bot }) => {
   const start = moment().startOf('day').format('YYYY-MM-DD HH:mm:ss')
   const end = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss')
-  const room = msg.room()
+  const room = await msg.room()
   const roomId = room.id
   const count = await Message.count({
     where: {
@@ -44,7 +44,10 @@ module.exports = new DelayQueue(2000).subscribe(async ({ msg, bot }) => {
   let i = 1
   for (const msg of messages) {
     let contact = bot.Contact.load(msg.getDataValue('contactId'))
-    let alias = await room.alias(contact)
+    let alias = null
+    if (room.has(contact)) {
+      alias = await room.alias(contact)
+    }
 
     message += `
 top${i++} ${alias} - ${msg.getDataValue('count')}`

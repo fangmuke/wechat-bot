@@ -11,8 +11,8 @@ const sequelize = new Sequelize({
 module.exports = new DelayQueue(2000).subscribe(async ({ msg, bot }) => {
   const start = moment().startOf('day').format('YYYY-MM-DD HH:mm:ss')
   const end = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss')
-  const room = msg.room()
-  const contact = msg.from()
+  const room = await msg.room()
+  const contact = await msg.from()
   const roomId = room.id
   const contactId = contact.id
 
