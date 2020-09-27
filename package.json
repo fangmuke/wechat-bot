@@ -1,0 +1,16 @@
+{
+  "name": "wechat-bot",
+  "version": "1.0.0",
+  "description": "微信机器人",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo Hello WeChat Bot!"
+  },
+  "keywords": [
+    "微信",
+    "机器人"
+  ],
+  "author": "fangmuke",
+  "license": "MIT"
+}
