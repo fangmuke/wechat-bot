@@ -2,9 +2,12 @@
   "name": "wechat-bot",
   "version": "1.0.0",
   "description": "微信机器人",
-  "main": "index.js",
+  "main": "src/main.ts",
+  "engines": {
+    "node": "12"
+  },
   "scripts": {
-    "start": "node index.js",
+    "start": "ts-node src/main.ts",
     "test": "echo Hello WeChat Bot!"
   },
   "keywords": [
@@ -12,5 +15,10 @@
     "机器人"
   ],
   "author": "fangmuke",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "wechaty": "^0.47.24",
+    "wechaty-plugin-contrib": "^0.14.15",
+    "wechaty-puppet-padplus": "^0.7.40"
+  }
 }
