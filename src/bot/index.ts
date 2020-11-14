@@ -1,28 +1,18 @@
-import {Wechaty, log,} from 'wechaty'
+import { Wechaty, WechatyOptions } from 'wechaty';
+import { pluginList } from './plugins';
 
-import {pluginList} from './plugins'
+let wechaty: undefined | Wechaty;
 
-let index: undefined | Wechaty
+function getBot(options?: WechatyOptions): Wechaty {
+  if (wechaty == undefined) {
+    wechaty = new Wechaty(options);
 
-function getBot(name: string): Wechaty {
-    log.verbose('getWechaty', 'getFriday(%s)', name)
-
-    const wechaty = new Wechaty({
-        name,
-    })
-
-    void pluginList
-
-    /**
-     * Initialize Plugins
-     */
     wechaty.use(
-        ...pluginList,
-    )
+      ...pluginList,
+    );
+  }
 
-    index = wechaty
-
-    return wechaty
+  return wechaty;
 }
 
-export {getBot}
+export { getBot };

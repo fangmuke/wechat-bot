@@ -1,0 +1,11 @@
+{
+  "padLocal": {
+    "host": "127.0.0.1",
+    "port": 0,
+    "token": "",
+    "serverCAFilePath": ""
+  },
+  "bot": {
+    "name": "fangmuke_bot"
+  }
+}

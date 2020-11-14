@@ -1,17 +1,31 @@
-import {log} from "wechaty";
-import {getBot} from "./bot";
+import { get } from 'config';
+import { getBot } from './bot';
+import PuppetPadlocal from 'wechaty-puppet-padlocal';
+import { WechatyOptions } from 'wechaty';
 
 async function main() {
-    log.verbose('main', 'main()')
 
-    const bot = getBot('fangmuke_bot')
+  const name: string = get('bot.name');
+  const host: string = get('padLocal.host');
+  const port: number = get('padLocal.port');
+  const token: string = get('padLocal.token');
+  const serverCAFilePath: string = get('padLocal.serverCAFilePath');
 
-    await bot.start()
+  const puppet = new PuppetPadlocal({
+    endpoint: `${host}:${port}`,
+    token,
+    serverCAFilePath,
+  });
+
+  const options: WechatyOptions = {name, puppet};
+
+  const bot = getBot(options);
+
+  await bot.start();
 }
 
 main()
-    .catch((e) => {
-        log.error('Main', 'main() rejection: %s', e)
-        console.error(e)
-        process.exit(1)
-    })
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
