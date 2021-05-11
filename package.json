@@ -22,7 +22,7 @@
     "@types/config": "^0.0.36",
     "@types/lodash": "^4.14.165",
     "config": "^3.3.2",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "wechaty": "^0.48.10",
     "wechaty-plugin-contrib": "^0.14.15",
     "wechaty-puppet": "^0.32.3",
